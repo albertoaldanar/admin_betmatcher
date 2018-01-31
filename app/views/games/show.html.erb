@@ -1,0 +1,25 @@
+<style>
+  body{
+    font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+  }
+
+  .description-card{
+    padding: 30px;
+    background-color: #F5F5F5;
+  }
+</style>
+
+<div class ="description-card text-center">
+  <ul class ="list-inline">
+    <li><%=@game.local%></li>
+      <li>VS</li>
+    <li><%=@game.visit%></li>
+  </ul>
+
+  <div class ="description">
+    <p><%= @game.stadium%></p>
+    <p><%=@game.date%></p>
+  </div>
+
+  <%=link_to "Edit", edit_game_path(@game), class: "btn btn-default"%>
+</div>

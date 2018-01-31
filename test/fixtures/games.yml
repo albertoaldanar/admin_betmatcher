@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  local: MyString
+  visit: MyString
+  stadium: MyString
+  date: MyString
+
+two:
+  local: MyString
+  visit: MyString
+  stadium: MyString
+  date: MyString

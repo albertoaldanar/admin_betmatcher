@@ -1,0 +1,21 @@
+<style>
+  .form {
+    border-radius: 10px;
+    background-color: #F5F5F5;
+  }
+</style>
+
+
+<div class =" form text-center">
+  <ul class ="list-unstyled">
+    <li>
+      <%=simple_form_for @game do |f|%>
+        <%= f.input :local%>
+        <%= f.input :visit%>
+        <%= f.input :stadium%>
+        <%= f.input :date%>
+        <%= f.button :submit%>
+      <%end%>
+    </li>
+  </ul>
+</div>

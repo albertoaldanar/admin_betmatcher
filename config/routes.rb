@@ -1,10 +1,8 @@
 Rails.application.routes.draw do
-  # get 'pages/home'
-
+  resources :games
   authenticated :user do
     root 'pages#home', as: :authenticated_root
   end
-
   devise_scope :user do
     root to: "devise/sessions#new"
   end

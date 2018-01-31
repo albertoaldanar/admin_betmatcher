@@ -1,0 +1,36 @@
+<style>
+  body{
+    font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+  }
+  .games-card{
+    border-radius: 10px;
+    box-shadow: 20px;
+    padding: 30px;
+    background-color: #F5F5F5
+  }
+  .card li{
+    padding-bottom: 30px;
+  }
+</style>
+
+<div class ="container">
+  <div class ="row">
+
+      <div class =" text-center games-card">
+        <h2 class ="text-center">Betmathcer games</h2>
+        <br/>
+        <div class ="card">
+          <ul>
+            <%@games.each do |game|%>
+              <li class = "list-inline">
+                <%=link_to game_path(game), class: "btn btn-primary" do %>
+                  <%=game.local%> VS <%=game.visit%>
+                <%end%>
+              </li>
+            <%end%>
+          </ul>
+        </div>
+      </div>
+
+  </div>
+</div>

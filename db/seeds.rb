@@ -5,3 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+    game = Game.create!(local: "Manchester UTD", visit: "Chelsea", stadium: "Old trafford", date: "16/02 - 9:00pm" )
+    game1 = Game.create!(local: "Barcelona", visit: "Real Madrid", stadium: "Camp nou", date: "16/02 - 9:00pm" )
+    game2 = Game.create!(local: "Milan", visit: "Roma", stadium: "San Siro", date: "16/02 - 9:00pm" )
