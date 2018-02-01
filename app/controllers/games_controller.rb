@@ -1,4 +1,5 @@
 class GamesController < ApplicationController
+  before_action :authenticate_user!
   def index
     @games = Game.all
   end
@@ -8,15 +9,16 @@ class GamesController < ApplicationController
   end
 
   def new
-    @game = Game.new(game_params)
+    @game = Game.new
   end
 
   def create
     @game = Game.new(game_params)
     if @game.save
-      redirect_to game_path
+      redirect_to game_path(@game)
     else
       render :new
+    end
   end
 
   def update
@@ -30,10 +32,14 @@ class GamesController < ApplicationController
   end
 
   def edit
-     @game = Game.find(params[:id])
+    @game = Game.find(params[:id])
   end
 
   def destroy
+    @game = Game.find(params[:id])
+    if @game.destroy!
+      redirect_to games_path
+    end
   end
 
   private

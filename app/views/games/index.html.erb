@@ -11,24 +11,34 @@
   .card li{
     padding-bottom: 30px;
   }
+  .list-items{
+    padding: 20px;
+  }
 </style>
 
 <div class ="container">
   <div class ="row">
-
       <div class =" text-center games-card">
         <h2 class ="text-center">Betmathcer games</h2>
         <br/>
         <div class ="card">
           <ul>
             <%@games.each do |game|%>
-              <li class = "list-inline">
+              <li class = "list-inline list-items">
+              <div>
                 <%=link_to game_path(game), class: "btn btn-primary" do %>
                   <%=game.local%> VS <%=game.visit%>
                 <%end%>
+              </div>
+              <div>
+                <%= link_to game, method: :delete , class: "btn btn-default destroy-course" do %>
+                    Destroy
+                <%end%>
+              </div>
               </li>
             <%end%>
           </ul>
+          <%=link_to "Create game", new_game_path, class: "btn btn-default"%>
         </div>
       </div>
 

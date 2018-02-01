@@ -1,2 +1,9 @@
-<h1>Games#new</h1>
-<p>Find me in app/views/games/new.html.erb</p>
+<div class ="text-center">
+  <%=simple_form_for @game do |f|%>
+    <%=f.input :local%>
+    <%=f.input :visit%>
+    <%=f.input :stadium%>
+    <%=f.input :date%>
+    <%=f.button :submit, "CREATE", class: "btn btn-primary"%>
+  <%end%>
+</div>
