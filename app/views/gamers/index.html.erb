@@ -1,0 +1,48 @@
+
+<style>
+  .items{
+    display: flex;
+    justify-content: space-around;
+    padding: 25px;
+    transition: 0.3s;
+    border: 0.8px solid #F5F5F5;
+  }
+  .items:hover{
+    background-color: #F5F5F5;
+  }
+  .create-btn{
+    margin: 30px;
+  }
+
+</style>
+
+
+<div class ="text-center">
+  <h3>Betmatcher has <%=@gamers_c%> users</h3>
+  <ul class ="list-unstyled user-list">
+    <%@gamers.each do |gamer|%>
+      <li class ="items">
+        <div class ="item">
+          <p><strong>Username</strong></p>
+          <p><%=gamer.username%></p>
+        </div>
+        <div class ="item">
+          <p><strong>Country</strong></p>
+          <p><%=gamer.country%></p>
+        </div>
+        <div class ="item">
+          <p><strong>Coins</strong></p>
+          <p><%=gamer.coins%></p>
+        </div>
+        <div class ="item">
+          <p><strong>Rainking</strong></p>
+          <p>#<%=gamer.ranking%></p>
+        </div>
+        <a href ="#" class ="btn btn-info"> Edit</a>
+      </li>
+    <%end%>
+  </ul>
+  <div class ="create-btn">
+    <%=link_to "Create user for Betmathcer", new_gamer_path, class: "btn btn-info"%>
+  </div>
+</div>

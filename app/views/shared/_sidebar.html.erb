@@ -43,7 +43,7 @@ body {
 <div id="mySidenav" class="sidenav">
   <a class="closebtn" onclick="closeNav()">X</a>
   <%=link_to "Games", games_path%>
-  <a href="#">Users</a>
+  <%=link_to "Users", gamers_path%>
   <a href="#">Coins</a>
   <br/>
   <%= link_to "Logout", destroy_user_session_path, method: :delete%>

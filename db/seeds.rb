@@ -9,3 +9,8 @@
     game = Game.create!(local: "Manchester UTD", visit: "Chelsea", stadium: "Old trafford", date: "16/02 - 9:00pm" )
     game1 = Game.create!(local: "Barcelona", visit: "Real Madrid", stadium: "Camp nou", date: "16/02 - 9:00pm" )
     game2 = Game.create!(local: "Milan", visit: "Roma", stadium: "San Siro", date: "16/02 - 9:00pm" )
+
+
+    user = Gamer.create!(username: "albertoaldanar", ranking: 12, coins: 4832, country: "Mexico")
+    user1 = Gamer.create!(username: "pato7", ranking: 2, coins: 7832, country: "USA")
+    user2 = Gamer.create!(username: "danieljrodi", ranking: 23, coins: 1992, country: "Brasil")

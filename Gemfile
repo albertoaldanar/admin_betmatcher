@@ -35,6 +35,8 @@ gem 'bootstrap-sass'
 gem 'autoprefixer-rails'
 gem 'font-awesome-sass'
 gem 'simple_form'
+gem 'country_select'
+
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

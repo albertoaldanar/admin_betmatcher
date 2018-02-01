@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :gamers
+
   resources :games
   authenticated :user do
     root 'pages#home', as: :authenticated_root
