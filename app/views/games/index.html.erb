@@ -11,9 +11,10 @@
   .card li{
     padding-bottom: 30px;
   }
-  .list-items{
-    padding: 20px;
+  .item{
+    margin-bottom: 10px;
   }
+
 </style>
 
 <div class ="container">
@@ -25,7 +26,7 @@
           <ul>
             <%@games.each do |game|%>
               <li class = "list-inline list-items">
-              <div>
+              <div class ="item">
                 <%=link_to game_path(game), class: "btn btn-primary" do %>
                   <%=game.local%> VS <%=game.visit%>
                 <%end%>
@@ -37,8 +38,8 @@
               </div>
               </li>
             <%end%>
+            <%=link_to "Create game", new_game_path, class: "btn btn-danger"%>
           </ul>
-          <%=link_to "Create game", new_game_path, class: "btn btn-default"%>
         </div>
       </div>
 

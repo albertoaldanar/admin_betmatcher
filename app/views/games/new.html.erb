@@ -1,4 +1,16 @@
-<div class ="text-center">
+  <style>
+    .form {
+      border-radius: 10px;
+      background-color: #F5F5F5;
+      margin: 40px;
+    }
+    .input{
+      margin-bottom: 10px;
+    }
+  </style>
+
+<div class ="text-center form">
+  <div class ="input">
   <%=simple_form_for @game do |f|%>
     <%=f.input :local%>
     <%=f.input :visit%>
@@ -6,4 +18,5 @@
     <%=f.input :date%>
     <%=f.button :submit, "CREATE", class: "btn btn-primary"%>
   <%end%>
+  </div>
 </div>
