@@ -1,0 +1,76 @@
+
+<style>
+  .items{
+    display: flex;
+    justify-content: space-around;
+    padding: 25px;
+    transition: 0.3s;
+    border: 0.8px solid #F5F5F5;
+  }
+  .items:hover{
+    background-color: #F5F5F5;
+  }
+  .create-btn{
+    margin: 30px;
+  }
+
+</style>
+
+<div class ="text-center">
+  <h3>Actualmente tienes <%=@salida_c%> salidas en tu administrador</h3>
+  <br/>
+  <br/>
+  <ul class ="list-unstyled user-list">
+    <%@salidas.each do |salida|%>
+      <li class ="items">
+        <div class ="item">
+          <p><strong>Nombre</strong></p>
+          <p><%=salida.nombre%></p>
+        </div>
+        <div class ="item">
+          <p><strong>Telefono</strong></p>
+          <p><%=salida.telefono%></p>
+        </div>
+        <div class ="item">
+          <p><strong>Email</strong></p>
+          <p><%=salida.email%></p>
+        </div>
+        <a href ="#" class ="btn btn-info"> Ver</a>
+      </li>
+    <%end%>
+  </ul>
+  <div class ="create-btn">
+    <%= link_to "Registrar nueva salida", "#myModal", :class => "btn btn-info", "data-toggle" => "modal" %>
+  </div>
+
+<!-- Aqui se crea el modal -->
+<div id="myModal" class="modal fade " tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel">Registro de salida</h3>
+      </div>
+      <%= simple_form_for @salida_nueva do |f| %>
+        <div class="modal-body">
+          <div class="form-group">
+              <%= f.text_field :nombre, class: "form-control input-lg", placeholder: "Nombre del usuario" %>
+            </div>
+            <div class="form-group">
+              <%= f.text_field :telefono, class: "form-control input-lg", placeholder: "Telefono" %>
+            </div>
+            <div class="form-group">
+              <%= f.text_field :email, class: "form-control input-lg", placeholder: "Email" %>
+            </div>
+        </div>
+      <div class="modal-footer">
+        <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Cerrar</button>
+        <%= f.submit "Guardar", class: "btn btn-info" %>
+    <%end%>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+

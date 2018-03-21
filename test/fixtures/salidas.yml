@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  folio: 1
+  fecha: 2018-03-21
+  nombre: MyString
+  telefono: MyString
+  contacto: MyString
+  email: MyString
+  solicitud_cliente: MyString
+
+two:
+  folio: 1
+  fecha: 2018-03-21
+  nombre: MyString
+  telefono: MyString
+  contacto: MyString
+  email: MyString
+  solicitud_cliente: MyString

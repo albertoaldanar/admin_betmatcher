@@ -42,14 +42,14 @@ body {
 
 <div id="mySidenav" class="sidenav">
   <a class="closebtn" onclick="closeNav()">X</a>
-  <%=link_to "Games", games_path%>
+  <%=link_to "Salidas", salidas_path%>
   <%=link_to "Users", gamers_path%>
   <a href="#">Coins</a>
   <br/>
-  <%= link_to "Logout", destroy_user_session_path, method: :delete%>
+  <%= link_to "Cerrar", destroy_user_session_path, method: :delete%>
 </div>
 
-<span style="font-size:30px;cursor:pointer; margin-left: 10px;" onclick="openNav()">&#9776; </span>
+<span style="font-size:30px;cursor:pointer; margin-left: 10px; margin-top: 10px;" onclick="openNav()">&#9776; </span>
 
 <script>
 function openNav() {
