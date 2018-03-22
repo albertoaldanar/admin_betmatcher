@@ -1,7 +1,7 @@
 class SalidasController < ApplicationController
   def index
-    @salidas = Salida.all
-    @salida_c = Salida.count
+    @salidas = Salida.where(terminada: nil)
+    @salida_c = @salidas.count
     @salida_nueva = Salida.new
   end
 
@@ -10,12 +10,18 @@ class SalidasController < ApplicationController
   end
 
   def show
+    @salida = Salida.find(params[:id])
   end
 
   def edit
+    @salida = Salida.find(params[:id])
   end
 
   def update
+    @salida = Salida.find(params[:id])
+    if @salida.update!(edit_params)
+      redirect_to salida_path(@salida)
+    end
   end
 
   def destroy
@@ -24,12 +30,29 @@ class SalidasController < ApplicationController
   def create
     @salida_nueva = Salida.new(require_params)
     if @salida_nueva.save
-      redirect_to salidas_path
+      redirect_to salida_path(@salida_nueva)
     end
+  end
+
+  def finish
+    @salida = Salida.find(params[:id])
+    @salida.terminada = true
+    @salida.save
+    redirect_to terminadas_path
+  end
+
+  def ready
+    @salidas = Salida.where(terminada: true)
+    @salida_c = @salidas.count
   end
 
   private
   def require_params
     params.require(:salida).permit(:nombre, :telefono, :email)
   end
+
+  def edit_params
+    params.require(:salida).permit(:marca, :modelo, :nombre, :email, :telefono, :solicitud_cliente, :lecturas, :serie, :capacidad)
+  end
 end
+

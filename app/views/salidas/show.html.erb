@@ -1,2 +1,164 @@
-<h1>Salidas#show</h1>
-<p>Find me in app/views/salidas/show.html.erb</p>
+<style>
+  .card{
+    position: relative;
+    border: 1px gray solid;
+    border-radius: 10px;
+    margin: 50px;
+    padding: 20px;
+  }
+
+  .intro{
+    display: flex;
+    justify-content: space-around;
+    border-bottom: 0.5px black double;
+  }
+
+  .second-part{
+    margin-top: 50px;
+  }
+
+  .options{
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    padding: 10px;
+  }
+
+  .filling-format{
+    margin-bottom: 15px;
+  }
+
+  .box{
+    border: 1px gray solid;
+    border-radius: 10px;
+    padding: 60px;
+    margin: 40px;
+  }
+
+  .finish{
+
+  }
+
+</style>
+
+<div class = "card">
+  <div class ="intro">
+    <div>
+      <img class="image" src = "https://www.vectorportal.com/img_novi/round-logo.jpg" height ="100" width= "100">
+    </div>
+    <div>
+      <h2>Aldana Clima Integral</h2>
+    </div>
+    <div>
+      <ul class ="list-unstyled">
+        <li>
+          <h4> Folio <strong> <%=@salida.id%> </strong> </h4>
+        </li>
+
+        <li>
+          <h4><strong>16/02/2017</strong></h4>
+        </li>
+
+      </ul>
+    </div>
+  </div>
+
+  <h3 class ="text-center second-part"> <strong>Datos del cliente</strong></h3>
+  <br/>
+  <div class ="list-info">
+    <ul class ="list-unstyled">
+      <h4> - <strong>Nombre: </strong><%=@salida.nombre%> </h4>
+      <h4> - <strong>Telefono: </strong><%=@salida.telefono%></h4>
+      <h4> - <strong> Correo Electronico: </strong> <%=@salida.email%></h4>
+    </ul>
+  </div>
+
+  <div class ="filling-format">
+    <h3 class ="text-center">- <strong>Solicitud de cliente:</strong></h3>
+    <div class ="box">
+      <p><%=@salida.solicitud_cliente%></p>
+    </div>
+  </div>
+
+  <div class ="filling-format">
+    <h3 class ="text-center">- <strong>Reporte general de servicio:</strong></h3>
+  </div>
+
+  <div class ="list-info">
+    <ul class ="list-unstyled">
+      <h4> <strong>- Marca:</strong> <%=@salida.marca%> </h4>
+      <h4> <strong>- Modelo:</strong> <%=@salida.modelo%> </h4>
+      <h4> <strong>- Serie:</strong> <%=@salida.serie%> </h4>
+      <h4> <strong>- Capacidad:</strong> <%=@salida.capacidad%> </h4>
+    </ul>
+    <br/>
+    <h4> - Lecturas: </h4>
+    <div class ="box">
+      <p><%=@salida.lecturas%></p>
+    </div>
+  </div>
+
+  <%if @salida.terminada.nil? %>
+    <div class ="options">
+      <%= link_to "Completar", "#myModal", :class => "btn btn-info reg-btn", "data-toggle" => "modal" %>
+      <%= link_to "Impimir", salidas_path, class: "btn btn-success"%>
+    </div>
+    <%= simple_form_for @salida, url: finish_salida_path(@salida), method: :post do |f| %>
+      <%= f.submit @salida.terminada, class: "btn btn-danger"%>
+    <% end %>
+  <%end%>
+
+
+<div class ="create-btn text-center">
+</div>
+
+<!-- Aqui se crea el modal -->
+<div id="myModal" class="modal fade " tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel">Registro de salida</h3>
+      </div>
+      <%= simple_form_for @salida do |f| %>
+        <div class="modal-body">
+          <div class="form-group">
+              <%= f.text_field :nombre, class: "form-control input-lg", placeholder: "Nombre del usuario" %>
+            </div>
+            <div class="form-group">
+              <%= f.text_field :telefono, class: "form-control input-lg", placeholder: "Telefono" %>
+            </div>
+            <div class="form-group">
+              <%= f.text_field :email, class: "form-control input-lg", placeholder: "Email" %>
+            </div>
+
+             <div class="form-group">
+              <%= f.text_field :solicitud_cliente, class: "form-control input-lg", placeholder: "Solicitud cliente" %>
+            </div>
+
+            <div class="form-group">
+              <%= f.text_field :marca, class: "form-control input-lg", placeholder: "Marca" %>
+            </div>
+            <div class="form-group">
+              <%= f.text_field :modelo, class: "form-control input-lg", placeholder: "Modelo" %>
+            </div>
+            <div class="form-group">
+              <%= f.text_field :serie, class: "form-control input-lg", placeholder: "Serie" %>
+            </div>
+            <div class="form-group">
+              <%= f.text_field :capacidad, class: "form-control input-lg", placeholder: "Capacidad" %>
+            </div>
+            <div class="form-group">
+              <%= f.text_field :lecturas, class: "form-control input-lg", placeholder: "Lecturas" %>
+            </div>
+        </div>
+      <div class="modal-footer">
+        <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Cerrar</button>
+        <%= f.submit "Guardar", class: "btn btn-info" %>
+    <%end%>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>

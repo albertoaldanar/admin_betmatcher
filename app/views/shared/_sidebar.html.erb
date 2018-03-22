@@ -17,7 +17,7 @@ body {
 }
 
 .sidenav a {
-    padding: 8px 8px 8px 32px;
+    padding: 30px 8px 8px 32px;
     text-decoration: none;
     font-size: 25px;
     color: #818181;
@@ -42,11 +42,13 @@ body {
 
 <div id="mySidenav" class="sidenav">
   <a class="closebtn" onclick="closeNav()">X</a>
-  <%=link_to "Salidas", salidas_path%>
-  <%=link_to "Users", gamers_path%>
-  <a href="#">Coins</a>
+  <%=link_to "Registrar", root_path%>
+  <%=link_to "Salidas por terminar", salidas_path%>
+  <%=link_to "Salidas terminadas", terminadas_path%>
   <br/>
-  <%= link_to "Cerrar", destroy_user_session_path, method: :delete%>
+  <br/>
+  <br/>
+  <%= link_to "Cerrar sesion", destroy_user_session_path, method: :delete%>
 </div>
 
 <span style="font-size:30px;cursor:pointer; margin-left: 10px; margin-top: 10px;" onclick="openNav()">&#9776; </span>

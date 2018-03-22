@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
-  resources :salidas
+  get 'terminadas'=> 'salidas#ready'
+  resources :salidas do
+    member do
+      post :finish
+    end
+  end
 
   resources :gamers
 
