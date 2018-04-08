@@ -36,6 +36,7 @@ gem 'autoprefixer-rails'
 gem 'font-awesome-sass'
 gem 'simple_form'
 gem 'country_select'
+gem "font-awesome-rails"
 
 
 # Use Capistrano for deployment

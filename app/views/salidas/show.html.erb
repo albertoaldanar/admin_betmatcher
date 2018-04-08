@@ -9,7 +9,7 @@
 
   .intro{
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     border-bottom: 0.5px black double;
   }
 
@@ -35,19 +35,95 @@
     margin: 40px;
   }
 
-  .finish{
-
+  .items{
+    position: relative;
+    padding-bottom: 25px;
+    transition: 0.3s;
+    border-bottom: 0.5px gray solid;
   }
 
+  .material{
+    margin-bottom: 60px;
+  }
+
+  .image{
+    margin-bottom: 10px;
+  }
+
+  .color{
+    color: red;
+  }
+
+  .firmas{
+    margin-top: 40px;
+    display:flex;
+    justify-content: space-around;
+  }
+
+  .list-items{
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px gray solid;
+  }
+  .back{
+    margin-right: 10px;
+  }
+
+  .firma{
+    border-top: 1px gray solid;
+  }
+
+  .changes{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+
+  .codigo{
+    position: absolute;
+    left:0px;
+  }
+
+  .cantidad{
+    position: absolute;
+    left:0px;
+    right: 0px;
+  }
+
+  .desc{
+    position: absolute;
+    right:0px;
+  }
+
+
+
 </style>
+<br/>
+<%= link_to root_path, class: "btn btn-default" do %>
+  <img src ="https://image.flaticon.com/icons/svg/263/263085.svg" width ="30" height="30">
+<%end%>
+<%if @salida.terminada.nil?%>
+  <div class="container">
+  <br/>
+    <div class="dropdown">
+      <button class="btn btn-info dropdown-toggle" type="button" data-toggle="dropdown">Opciones
+      <span class="caret"></span></button>
+      <ul class="dropdown-menu">
+        <li><%= link_to "Agregar material", "#matModal", "data-toggle" => "modal" %></li>
+        <li class="divider"></li>
+        <li><%= link_to "Completar", "#myModal", "data-toggle" => "modal" %> </li>
+      </ul>
+    </div>
+  </div>
+<%end%>
 
 <div class = "card">
   <div class ="intro">
     <div>
-      <img class="image" src = "https://www.vectorportal.com/img_novi/round-logo.jpg" height ="100" width= "100">
+      <img class ="image" src  = "https://static.wixstatic.com/media/79b91a_b6d2b2bf0ffc4aebb930cff78cd833fe~mv2.png/v1/fill/w_573,h_152,al_c,lg_1/79b91a_b6d2b2bf0ffc4aebb930cff78cd833fe~mv2.png" height ="80" width= "300">
     </div>
     <div>
-      <h2>Aldana Clima Integral</h2>
+      <h2>Aldana Clima Integral SA de CV</h2>
     </div>
     <div>
       <ul class ="list-unstyled">
@@ -56,27 +132,29 @@
         </li>
 
         <li>
-          <h4><strong>16/02/2017</strong></h4>
+          <h4><strong><%=@salida.created_at%></strong></h4>
         </li>
 
       </ul>
     </div>
   </div>
 
-  <h3 class ="text-center second-part"> <strong>Datos del cliente</strong></h3>
+  <h3 class ="text-center second-part"> <strong>Datos del cliente / Factura</strong></h3>
   <br/>
   <div class ="list-info">
     <ul class ="list-unstyled">
       <h4> - <strong>Nombre: </strong><%=@salida.nombre%> </h4>
+      <h4> - <strong> Dirección: </strong> <%=@salida.direccion%></h4>
       <h4> - <strong>Telefono: </strong><%=@salida.telefono%></h4>
       <h4> - <strong> Correo Electronico: </strong> <%=@salida.email%></h4>
+      <h4> - <strong> Contacto: </strong> <%=@salida.contacto%></h4>
     </ul>
   </div>
 
   <div class ="filling-format">
     <h3 class ="text-center">- <strong>Solicitud de cliente:</strong></h3>
     <div class ="box">
-      <p><%=@salida.solicitud_cliente%></p>
+      <h4><%=@salida.solicitud_cliente%></h4>
     </div>
   </div>
 
@@ -92,27 +170,110 @@
       <h4> <strong>- Capacidad:</strong> <%=@salida.capacidad%> </h4>
     </ul>
     <br/>
-    <h4> - Lecturas: </h4>
+    <h4> <strong>- Observaciones: </strong></h4>
     <div class ="box">
-      <p><%=@salida.lecturas%></p>
+      <h4><%=@salida.lecturas%></h4>
     </div>
   </div>
 
-  <%if @salida.terminada.nil? %>
-    <div class ="options">
-      <%= link_to "Completar", "#myModal", :class => "btn btn-info reg-btn", "data-toggle" => "modal" %>
-      <%= link_to "Impimir", salidas_path, class: "btn btn-success"%>
+  <%if @salida.materials.count > 0 %>
+    <div class ="material text-center">
+      <div class ="changes">
+        <h3><strong> - Lista de materiales requeridos</strong> </h3>
+        <%if current_user.id == 2 && !@salida.terminada.nil?%>
+          <div>
+            <%= link_to "Modificar cantidades", "#matchangeModal", "data-toggle" => "modal", class: "btn btn-warning" %>
+          </div>
+        <%end%>
+      </div>
+
+        <div class ="list-items">
+          <p><strong>Código</strong></p>
+          <p><strong>Cantidad</strong></p>
+          <p><strong>Descripción</strong></p>
+        </div>
+
+        <ul class ="list-unstyled user-list">
+          <%@materials.each do |mat|%>
+            <li class ="items">
+              <div class ="codigo">
+                <p><%=mat.codigo%></p>
+              </div>
+
+              <div class ="cantidad">
+                <p><%=mat.cantidad%></p>
+              </div>
+
+              <div class ="desc">
+                <p><%=mat.descripcion%></p>
+              </div>
+
+              <%if current_user.id == 2 && !@salida.terminada.nil?%>
+                <%if mat.vuelta.nil?%>
+                <div class= "item hidden">
+                  <%= simple_form_for @material, url: vuelta_material_path(mat), method: :post do |f| %> <%= f.submit "Devolución", class: "btn btn-danger"%>
+                  <% end %>
+                </div>
+                <%else%>
+                  <div class ="item hidden">
+                    <p><strong>Devuelto</strong></p>
+                  </div>
+                <%end%>
+              <%end%>
+            </li>
+          <%end%>
+        </ul>
     </div>
-    <%= simple_form_for @salida, url: finish_salida_path(@salida), method: :post do |f| %>
-      <%= f.submit @salida.terminada, class: "btn btn-danger"%>
-    <% end %>
+
+  <%else%>
+    <h3 class ="text-center"> * No hay materiales registrados</h3>
+  <%end%>
+
+  <%if current_user.id == 2 && !@salida.terminada.nil?%>
+    <div class = "text-center">
+      <h3><strong> - Historial de cambios realizados por administrador</strong></h3>
+
+      <%@mat_vuelta.each do |mat|%>
+          <%if mat.salida_id == @salida.id %>
+            <%if !mat.change.nil? && mat.change > 0%>
+              <p class ="color"> * Se han aumentado <strong><%= mat.change%></strong> <%=mat.descripcion%> a los <%= mat.cantidad%> originales  con el codigo <%=mat.codigo%> </p>
+
+            <%elsif !mat.change.nil? && mat.change < 0 && (mat.change + mat.cantidad) > 0%>
+              <p class ="color"> * Se han devuelto <strong><%= (mat.change - mat.change) - mat.change%></strong> <%=mat.descripcion%> a los <%= mat.cantidad%> originales  con el codigo <%=mat.codigo%> </p>
+
+            <%elsif !mat.change.nil? && mat.change < 0 && ((mat.change + mat.cantidad) < 0 || mat.cantidad + mat.change == 0)%>
+
+              <p class ="color"> * Se ha devuelto todo el material de <%=mat.descripcion%> </p>
+            <%end%>
+          <%end%>
+      <%end%>
+    </div>
+  <%end%>
+
+  <%if @salida.terminada.nil?%>
+    <div class ="firmas">
+      <h4 class ="firma">Firma de técnico</h4>
+      <h4 class ="firma">Firma de cliente</h4>
+      <h4 class ="firma">Firma de autorización</h4>
+    </div>
   <%end%>
 
 
-<div class ="create-btn text-center">
-</div>
+  <%if @salida.terminada.nil?%>
+    <%= simple_form_for @salida, url: finish_salida_path(@salida), method: :post do |f| %>
+      <%= f.submit "Terminar", class: "btn btn-danger"%>
+    <% end %>
+  <%else%>
+    <%= link_to @salida, method: :delete , class: "btn btn-danger destroy-course",data: {confirm: "Estas seguro de eliminar este registro?"} do %>
+      Eliminar salida
+    <%end%>
+  <%end%>
 
-<!-- Aqui se crea el modal -->
+
+
+
+
+<!-- Modal para completar la salida -->
 <div id="myModal" class="modal fade " tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
@@ -161,4 +322,70 @@
   </div>
 </div>
 
+
+<!-- Modal para registrar el material -->
+<div id="matModal" class="modal fade " tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel">Registro de materiales</h3>
+      </div>
+      <%= simple_form_for @material do |f| %>
+        <div class="modal-body">
+          <div class="form-group">
+              <%= f.text_field :codigo, class: "form-control input-lg", placeholder: "Codigo de material" %>
+            </div>
+            <div class="form-group">
+              <%= f.text_field :cantidad, class: "form-control input-lg", placeholder: "Cantidad" %>
+            </div>
+            <div class="form-group">
+              <%= f.text_field :descripcion, class: "form-control input-lg", placeholder: "Descripción" %>
+            </div>
+            <div class="form-group hidden">
+              <%= f.text_field :salida_id, class: "form-control input-lg", placeholder: "Descripción" %>
+            </div>
+        </div>
+      <div class="modal-footer">
+        <%= f.submit "Añadir material", class: "btn btn-info" %>
+      <%end%>
+      </div>
+    </div>
+  </div>
 </div>
+
+<div id="matchangeModal" class="modal fade " tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel">Aumento o devolución de cantidad</h3>
+      </div>
+
+        <div class="modal-body">
+          <%@materials.each do |mat|%>
+            <p>Material: <strong><%=mat.descripcion%></strong>
+              <br/>
+             Cantidad: <strong><%=mat.cantidad%> </strong></p>
+              <%= simple_form_for mat do |f| %>
+                <div class="form-group">
+                  <%= f.input :change, :label => " Añade o devuelve ", class: " input-lg", placeholder: "cantidad" %>
+                 </div>
+                <%= f.submit "Guardar cambios", class: "btn btn-info" %>
+                <br/>
+                <br/>
+                <br/>
+                <div class="modal-footer">
+                </div>
+              <%end%>
+          <%end%>
+          <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Cerrar</button>
+        </div>
+      </div>
+
+    </div>
+</div>
+
+
+
+

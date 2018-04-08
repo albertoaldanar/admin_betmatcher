@@ -1,64 +1,83 @@
 <style>
-body {
-  font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
-}
+  body {
+    font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+  }
 
-.sidenav {
-    height: 100%;
-    width: 0;
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    left: 0;
-    background-color: #111;
-    overflow-y: hidden;
-    transition: 1s;
-    padding-top: 60px;
-}
+  .sidenav {
+      height: 100%;
+      width: 120px;
+      position: fixed;
+      z-index: 1;
+      top: 0;
+      left: 0;
+      background-color: #F5F5F5;
+      overflow-x: hidden;
+      padding-top: 20px;
+  }
 
-.sidenav a {
-    padding: 30px 8px 8px 32px;
-    text-decoration: none;
-    font-size: 25px;
-    color: #818181;
-    display: block;
+  .sidenav a {
+      padding: 6px 6px 6px 32px;
+      text-decoration: none;
+      font-size: 25px;
+      color: #818181;
+      display: block;
+      margin-bottom: 50px;
+  }
+
+  .sidenav a:hover {
+      color: #f1f1f1;
+  }
+
+  .main {
+      margin-left: 200px; /* Same as the width of the sidenav */
+  }
+
+  @media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+  }
+
+  .option{
     transition: 0.3s;
-}
+    padding: 5px 5px;
+  }
 
-.sidenav a:hover {
-    color: #f1f1f1;
-}
-
-.sidenav .closebtn {
-    position: absolute;
-    top: 0;
-    right: 25px;
-    font-size: 36px;
-    margin-left: 50px;
-    cursor: pointer;
-}
+  .option:hover{
+    background-color: #00BFFF;
+    transition: 0.5s;
+  }
 
 </style>
 
-<div id="mySidenav" class="sidenav">
-  <a class="closebtn" onclick="closeNav()">X</a>
-  <%=link_to "Registrar", root_path%>
-  <%=link_to "Salidas por terminar", salidas_path%>
-  <%=link_to "Salidas terminadas", terminadas_path%>
-  <br/>
-  <br/>
-  <br/>
-  <%= link_to "Cerrar sesion", destroy_user_session_path, method: :delete%>
+<div class="sidenav">
+  <div class ="option">
+    <%=link_to root_path do %>
+      <br/>
+        <img src = "https://image.flaticon.com/icons/svg/263/263115.svg" width ="40" height ="40"/>
+    <%end%>
+  </div>
+
+  <div class ="option">
+    <%=link_to terminadas_path do %>
+     <br/>
+      <img src ="https://image.flaticon.com/icons/svg/149/149148.svg" width ="40" height ="40"/>
+    <%end%>
+  </div>
+
+  <div class ="option">
+    <%=link_to salidas_path do %>
+     <br/>
+      <img src ="https://image.flaticon.com/icons/svg/77/77682.svg" height ="40", width ="40"/>
+    <%end%>
+  </div>
+
+  <div class ="option">
+    <br/>
+    <%= link_to destroy_user_session_path, method: :delete do%>
+      <img src ="https://image.flaticon.com/icons/svg/450/450418.svg" width ="40" height ="40"/>
+    <%end%>
+  </div>
+
 </div>
 
-<span style="font-size:30px;cursor:pointer; margin-left: 10px; margin-top: 10px;" onclick="openNav()">&#9776; </span>
 
-<script>
-function openNav() {
-  document.getElementById("mySidenav").style.width = "250px";
-}
-
-function closeNav() {
-  document.getElementById("mySidenav").style.width = "0";
-}
-</script>

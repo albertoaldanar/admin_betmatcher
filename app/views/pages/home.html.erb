@@ -1,20 +1,143 @@
 <style>
+
+  body{
+    background-color: #DCDCDC;
+    color: white;
+  }
+
   .title{
-    margin-bottom: 150px;
+    margin-bottom: 90px;
   }
 
   .reg-btn{
-    padding: 25px;
+    padding: 10px 160px;
     font-size: 17px;
   }
+
+  .graficas{
+    margin-top: 60px;
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .single{
+    border: 1px gray solid;
+    padding: 10px 80px;
+    margin-right: 60px;
+
+  }
+
+  .partb{
+    background-color: #1E90FF;
+  }
+
+  .partc{
+    background-color: #4169E1;
+  }
+
+  .part{
+    background-color: #191970;
+  }
+
+  .partd{
+    background-color: gray;
+  }
+
+  .pendientes{
+    padding: 40px 40px;
+    border: 1px white solid;
+    margin : 10px;
+  }
+
+  .create-btn{
+    margin-top: 100px;
+  }
+
+
+  .black{
+    color: black;
+  }
+
+  .pendientes{
+    background-color: #00BFFF;
+    padding: 10px;
+  }
+
+  .pct{
+    background-color: #00CED1;
+  }
+
 </style>
 
+<%=render partial: "shared/sidebar"%>
+<div class ="container">
+  <div class ="row">
+    <div class ="col-xs-10 col-sm-offset-4 col-md-12 col-md-offset-1">
 
-<h2 class ="text-center title"> Salidas Aldana Clima Integral</h2>
+      <%if @salidas_no_terminadas.count > 0 %>
+        <div class ="text-center recordatorio hidden">
+          <h3><storng>Recordatorio:</storng></h3>
+          <h4>Las salidas con los siguientes folios no se han termiando</h4>
+          <%@salidas_no_terminadas.each do |snt|%>
+            <%=snt.id%>
+          <%end%>
+        </div>
+      <%end%>
 
-<div class ="create-btn text-center">
-    <%= link_to "Registrar nueva salida", "#myModal", :class => "btn btn-info reg-btn", "data-toggle" => "modal" %>
+      <div class ="graficas">
+        <div class ="single part">
+          <h2>Salidas</h2>
+          <h3 class = "text-center"><%=@salidas.count%></h3>
+        </div>
+
+        <div class ="single partc">
+          <h2> Pendientes</h2>
+          <h3 class = "text-center"><%=@salidas_no_terminadas.count%></h3>
+        </div>
+
+        <div class ="single partb">
+          <h2 >Terminadas</h2>
+          <h3 class = "text-center"><strong><%=@terminadas.count%></strong></h3>
+        </div>
+      </div>
+
+    </div>
   </div>
+
+      <br/>
+      <div class ="row">
+        <div class ="col-xs-10 col-sm-offset-4 col-md-12 col-md-offset-1">
+        <div class ="single pct">
+              <h2 >Porcentaje terminado</h2>
+              <h3 class = "text-center"><%=@pct%> %</h3>
+            </div>
+          <div class = "salidas-no-terminadas text-center pendientes hidden">
+            <h3> Folios pendientes:</h3>
+            <ul class ="inline list-unstyled">
+            <%count = 0%>
+              <li>
+                <%@salidas_no_terminadas.each_with_index do |snt, index|%>
+                  <p><%=count+=1%>) <%=snt.id%></p>
+                <%end%>
+              </li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+
+      <div class ="row">
+        <div class ="col-xs-10 col-sm-offset-4 col-md-11 col-md-offset-1">
+          <div class ="create-btn text-center ">
+            <%= link_to  "#myModal", :class => "btn btn-info reg-btn", "data-toggle" => "modal" do %>
+            Registrar <img src ="https://image.flaticon.com/icons/svg/149/149411.svg" width="20" height="20">
+            <%end%>
+          </div>
+        </div>
+      </div>
+</div>
+
+
 
 <!-- Aqui se crea el modal -->
 <div id="myModal" class="modal fade " tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -22,18 +145,27 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h3 id="myModalLabel">Registro de salida</h3>
+        <h3 id="myModalLabel" class ="black"> Registro </h3>
       </div>
       <%= simple_form_for @salida_nueva do |f| %>
         <div class="modal-body">
           <div class="form-group">
-              <%= f.text_field :nombre, class: "form-control input-lg", placeholder: "Nombre del usuario" %>
+              <%= f.text_field :nombre, class: "form-control input-lg", placeholder: "Nombre" %>
+            </div>
+            <div class="form-group">
+              <%= f.text_field :direccion, class: "form-control input-lg", placeholder: "Dirección" %>
             </div>
             <div class="form-group">
               <%= f.text_field :telefono, class: "form-control input-lg", placeholder: "Telefono" %>
             </div>
             <div class="form-group">
               <%= f.text_field :email, class: "form-control input-lg", placeholder: "Email" %>
+            </div>
+            <div class="form-group">
+              <%= f.text_field :contacto, class: "form-control input-lg", placeholder: "Contacto" %>
+            </div>
+            <div class="form-group">
+              <%= f.text_field :solicitud_cliente, class: "form-control input-lg", placeholder: "Solicitud del cliente" %>
             </div>
         </div>
       <div class="modal-footer">

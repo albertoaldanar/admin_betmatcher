@@ -1,4 +1,5 @@
 class SalidasController < ApplicationController
+  before_action :authenticate_user!
   def index
     @salidas = Salida.where(terminada: nil)
     @salida_c = @salidas.count
@@ -11,6 +12,10 @@ class SalidasController < ApplicationController
 
   def show
     @salida = Salida.find(params[:id])
+    @materials = Material.where(salida_id: @salida.id)
+    @material = Material.new
+    @material.salida_id = @salida.id
+    @mat_vuelta = Material.all
   end
 
   def edit
@@ -25,6 +30,10 @@ class SalidasController < ApplicationController
   end
 
   def destroy
+    @salida = Salida.find(params[:id])
+    if @salida.destroy
+      redirect_to terminadas_path
+    end
   end
 
   def create
@@ -41,6 +50,7 @@ class SalidasController < ApplicationController
     redirect_to terminadas_path
   end
 
+
   def ready
     @salidas = Salida.where(terminada: true)
     @salida_c = @salidas.count
@@ -48,11 +58,19 @@ class SalidasController < ApplicationController
 
   private
   def require_params
-    params.require(:salida).permit(:nombre, :telefono, :email)
+    params.require(:salida).permit(:nombre, :telefono, :email, :solicitud_cliente, :contacto, :direccion)
   end
 
   def edit_params
-    params.require(:salida).permit(:marca, :modelo, :nombre, :email, :telefono, :solicitud_cliente, :lecturas, :serie, :capacidad)
+    params.require(:salida).permit(:marca, :modelo, :lecturas, :serie, :capacidad, :nombre, :telefono, :solicitud_cliente, :contacto, :direccion, :email)
+  end
+
+  def mat_params
+    params.require(:material).permit(:salida_id, :codigo, :cantidad, :descripcion)
+  end
+
+  def ed_params
+    params.require(:material).permit(:change)
   end
 end
 

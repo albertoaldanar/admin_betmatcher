@@ -1,5 +1,14 @@
 Rails.application.routes.draw do
+
+
+  resources :materials do
+    member do
+      post :vuelta
+    end
+  end
+
   get 'terminadas'=> 'salidas#ready'
+
   resources :salidas do
     member do
       post :finish

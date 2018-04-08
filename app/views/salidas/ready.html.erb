@@ -19,29 +19,34 @@
 
 </style>
 
-<div class ="text-center">
-  <h3>Actualmente tienes <%=@salida_c%> salidas terminadas en tu administrador</h3>
-  <br/>
-  <br/>
-  <ul class ="list-unstyled user-list">
-    <%@salidas.each do |salida|%>
-      <li class ="items">
-        <div class ="item">
-          <p><strong>Nombre</strong></p>
-          <p><%=salida.nombre%></p>
-        </div>
-        <div class ="item">
-          <p><strong>Fecha</strong></p>
-          <p><%=salida.created_at%></p>
-        </div>
-        <div class ="item">
-          <p><strong>Folio</strong></p>
-          <p><%=salida.id%></p>
-        </div>
-        <%=link_to "Ver salida", salida_path(salida), class: "btn btn-info show-btn"%>
-      </li>
-    <%end%>
-  </ul>
+<%=render partial: "shared/sidebar"%>
+<div class ="container">
+  <div class ="row">
+    <div class ="col-xs-10 col-sm-offset-4 col-md-11 col-md-offset-1">
+      <div class ="text-center">
+        <h2>Completas</h2>
+        <br/>
+        <br/>
+        <ul class ="list-unstyled user-list">
+          <%@salidas.each do |salida|%>
+            <li class ="items">
+              <div class ="item">
+                <p><strong>Nombre</strong></p>
+                <p><%=salida.nombre%></p>
+              </div>
+              <div class ="item">
+                <p><strong>Fecha</strong></p>
+                <p><%=salida.created_at%></p>
+              </div>
+              <div class ="item">
+                <p><strong>Folio</strong></p>
+                <p><%=salida.id%></p>
+              </div>
+              <%=link_to "Ver salida", salida_path(salida), class: "btn btn-info show-btn"%>
+            </li>
+          <%end%>
+        </ul>
+      </div>
+    </div>
+  </div>
 </div>
-
-
