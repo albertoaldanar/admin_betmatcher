@@ -1,9 +1,26 @@
 development:
-  adapter: async
+  adapter: postgresql
+  encoding: utf8
+  database: project_development
+  pool: 5
+  username:
+  password:
 
-test:
-  adapter: async
+test: &TEST
+  adapter: postgresql
+  encoding: utf8
+  database: project_test
+  pool: 5
+  username:
+  password:
 
 production:
-  adapter: redis
-  url: redis://localhost:6379/1
+  adapter: postgresql
+  encoding: utf8
+  database: project_production
+  pool: 5
+  username:
+  password:
+
+cucumber:
+  <<: *TEST
