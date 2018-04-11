@@ -3,18 +3,13 @@
     position: relative;
     border: 1px gray solid;
     border-radius: 10px;
-    margin: 50px;
-    padding: 20px;
+    padding: 0px 20px;
   }
 
   .intro{
     display: flex;
     justify-content: space-between;
     border-bottom: 0.4px black double;
-  }
-
-  .second-part{
-    margin-top: 10px;
   }
 
   .options{
@@ -31,8 +26,7 @@
   .box{
     border: 1px gray solid;
     border-radius: 10px;
-    padding: 60px;
-    margin: 40px;
+    padding: 40px 60px;
   }
 
   .items{
@@ -62,7 +56,7 @@
     border-bottom: 1px gray solid;
   }
   .back{
-    margin-right: 10px;
+    margin-left: 10px;
   }
 
   .firma{
@@ -91,7 +85,11 @@
     right:0px;
   }
 
-
+  .box-obs{
+    border: 1px gray solid;
+    border-radius: 10px;
+    padding: 120px 60px;
+  }
 
 </style>
 <br/>
@@ -100,7 +98,6 @@
 <%end%>
 <%if @salida.terminada.nil?%>
   <div class="container">
-  <br/>
     <div class="dropdown">
       <button class="btn btn-info dropdown-toggle" type="button" data-toggle="dropdown">Opciones
       <span class="caret"></span></button>
@@ -119,24 +116,22 @@
       <img class ="image" src  = "https://static.wixstatic.com/media/79b91a_b6d2b2bf0ffc4aebb930cff78cd833fe~mv2.png/v1/fill/w_573,h_152,al_c,lg_1/79b91a_b6d2b2bf0ffc4aebb930cff78cd833fe~mv2.png" height ="80" width= "300">
     </div>
     <div>
-      <h2>Aldana Clima Integral SA de CV</h2>
+      <h4>Aldana Clima Integral SA de CV</h4>
     </div>
     <div>
       <ul class ="list-unstyled">
         <li>
-          <h4> Folio <strong> <%=@salida.id - 5 %> </strong> </h4>
+          <h4> Folio <strong> <%=@salida.id - 6 %> </strong> </h4>
         </li>
 
         <li>
           <h4><strong><%=@salida.created_at%></strong></h4>
         </li>
-
       </ul>
     </div>
   </div>
 
   <h4 class ="text-center second-part"> <strong>Datos del cliente / Factura</strong></h4>
-  <br/>
   <div class ="list-info">
     <ul class ="list-unstyled">
       <p> - <strong>Nombre: </strong><%=@salida.nombre%> </p>
@@ -148,14 +143,14 @@
   </div>
 
   <div class ="filling-format">
-    <h3 class ="text-center">- <strong>Solicitud de cliente:</strong></h3>
+    <h4 class ="text-center">- <strong>Solicitud de cliente:</strong></h4>
     <div class ="box">
       <h4><%=@salida.solicitud_cliente%></h4>
     </div>
   </div>
 
   <div class ="filling-format">
-    <h3 class ="text-center">- <strong>Reporte general de servicio:</strong></h3>
+    <h4 class ="text-center">- <strong>Reporte general de servicio:</strong></h4>
   </div>
 
   <div class ="list-info">
@@ -165,17 +160,16 @@
       <p> <strong>- Serie:</strong> <%=@salida.serie%> </p>
       <p> <strong>- Capacidad:</strong> <%=@salida.capacidad%> </p>
     </ul>
-    <br/>
     <p> <strong>- Observaciones: </strong></p>
-    <div class ="box">
-      <h4><%=@salida.lecturas%></h4>
+    <div class ="box-obs">
+      <p><%=@salida.lecturas%></p>
     </div>
   </div>
 
   <%if @salida.materials.count > 0 %>
     <div class ="material text-center">
       <div class ="changes">
-        <h3><strong> - Lista de materiales requeridos</strong> </h3>
+        <h4><strong> - Lista de materiales requeridos</strong> </h4>
         <%if current_user.id == 2 && !@salida.terminada.nil?%>
           <div>
             <%= link_to "Modificar cantidades", "#matchangeModal", "data-toggle" => "modal", class: "btn btn-warning" %>
@@ -313,7 +307,6 @@
     </div>
   </div>
 </div>
-
 
 <!-- Modal para registrar el material -->
 <div id="matModal" class="modal fade " tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
