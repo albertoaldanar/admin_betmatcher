@@ -14,7 +14,7 @@
   }
 
   .second-part{
-    margin-top: 50px;
+    margin-top: 10px;
   }
 
   .options{
@@ -25,7 +25,7 @@
   }
 
   .filling-format{
-    margin-bottom: 15px;
+    margin-bottom: 5px;
   }
 
   .box{
@@ -40,10 +40,6 @@
     padding-bottom: 25px;
     transition: 0.3s;
     border-bottom: 0.5px gray solid;
-  }
-
-  .material{
-    margin-bottom: 60px;
   }
 
   .image{
@@ -128,7 +124,7 @@
     <div>
       <ul class ="list-unstyled">
         <li>
-          <h4> Folio <strong> <%=@salida.id%> </strong> </h4>
+          <h4> Folio <strong> <%=@salida.id - 5 %> </strong> </h4>
         </li>
 
         <li>
@@ -139,15 +135,15 @@
     </div>
   </div>
 
-  <h3 class ="text-center second-part"> <strong>Datos del cliente / Factura</strong></h3>
+  <h4 class ="text-center second-part"> <strong>Datos del cliente / Factura</strong></h4>
   <br/>
   <div class ="list-info">
     <ul class ="list-unstyled">
-      <h4> - <strong>Nombre: </strong><%=@salida.nombre%> </h4>
-      <h4> - <strong> Dirección: </strong> <%=@salida.direccion%></h4>
-      <h4> - <strong>Telefono: </strong><%=@salida.telefono%></h4>
-      <h4> - <strong> Correo Electronico: </strong> <%=@salida.email%></h4>
-      <h4> - <strong> Contacto: </strong> <%=@salida.contacto%></h4>
+      <p> - <strong>Nombre: </strong><%=@salida.nombre%> </p>
+      <p> - <strong> Dirección: </strong> <%=@salida.direccion%></p>
+      <p> - <strong>Telefono: </strong><%=@salida.telefono%></p>
+      <p> - <strong> Correo Electronico: </strong> <%=@salida.email%></p>
+      <p> - <strong> Contacto: </strong> <%=@salida.contacto%></p>
     </ul>
   </div>
 
@@ -164,13 +160,13 @@
 
   <div class ="list-info">
     <ul class ="list-unstyled">
-      <h4> <strong>- Marca:</strong> <%=@salida.marca%> </h4>
-      <h4> <strong>- Modelo:</strong> <%=@salida.modelo%> </h4>
-      <h4> <strong>- Serie:</strong> <%=@salida.serie%> </h4>
-      <h4> <strong>- Capacidad:</strong> <%=@salida.capacidad%> </h4>
+      <p> <strong>- Marca:</strong> <%=@salida.marca%> </p>
+      <p> <strong>- Modelo:</strong> <%=@salida.modelo%> </p>
+      <p> <strong>- Serie:</strong> <%=@salida.serie%> </p>
+      <p> <strong>- Capacidad:</strong> <%=@salida.capacidad%> </p>
     </ul>
     <br/>
-    <h4> <strong>- Observaciones: </strong></h4>
+    <p> <strong>- Observaciones: </strong></p>
     <div class ="box">
       <h4><%=@salida.lecturas%></h4>
     </div>
@@ -226,12 +222,12 @@
     </div>
 
   <%else%>
-    <h3 class ="text-center"> * No hay materiales registrados</h3>
+    <p class ="text-center"> * No hay materiales registrados</p>
   <%end%>
 
   <%if current_user.id == 2 && !@salida.terminada.nil?%>
     <div class = "text-center">
-      <h3><strong> - Historial de cambios realizados por administrador</strong></h3>
+      <p><strong> - Historial de cambios realizados por administrador</strong></p>
 
       <%@mat_vuelta.each do |mat|%>
           <%if mat.salida_id == @salida.id %>
@@ -252,9 +248,9 @@
 
   <%if @salida.terminada.nil?%>
     <div class ="firmas">
-      <h4 class ="firma">Firma de técnico</h4>
       <h4 class ="firma">Firma de cliente</h4>
-      <h4 class ="firma">Firma de autorización</h4>
+      <h4 class ="firma">Firma de jefe de taller</h4>
+      <h4 class ="firma">Firma de técnico</h4>
     </div>
   <%end%>
 
@@ -268,10 +264,6 @@
       Eliminar salida
     <%end%>
   <%end%>
-
-
-
-
 
 <!-- Modal para completar la salida -->
 <div id="myModal" class="modal fade " tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
