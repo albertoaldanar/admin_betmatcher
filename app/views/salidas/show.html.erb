@@ -3,7 +3,7 @@
     position: relative;
     border: 1px gray solid;
     border-radius: 10px;
-    padding: 0px 20px;
+    padding: 0px 40px;
   }
 
   .intro{
@@ -16,12 +16,8 @@
     position: absolute;
     bottom: 5px;
     right: 5px;
-    padding: 10px;
   }
 
-  .filling-format{
-    margin-bottom: 5px;
-  }
 
   .box{
     border: 1px gray solid;
@@ -88,7 +84,15 @@
   .box-obs{
     border: 1px gray solid;
     border-radius: 10px;
-    padding: 120px 60px;
+    padding: 100px 60px;
+  }
+
+  .together{
+    margin-bottom: -3px;
+  }
+
+  .space-dismiss{
+    margin-bottom: -10px;
   }
 
 </style>
@@ -121,24 +125,24 @@
     <div>
       <ul class ="list-unstyled">
         <li>
-          <h4> Folio <strong> <%=@salida.id - 6 %> </strong> </h4>
+          <p> Folio <strong> <%=@salida.id - 6 %> </strong> </p>
         </li>
 
         <li>
-          <h4><strong><%=@salida.created_at%></strong></h4>
+          <p><strong><%=@salida.created_at%></strong></p>
         </li>
       </ul>
     </div>
   </div>
 
-  <h4 class ="text-center second-part"> <strong>Datos del cliente / Factura</strong></h4>
+  <h4 class ="text-center second-part space-dismiss"> <strong>Datos del cliente / Factura</strong></h4>
   <div class ="list-info">
-    <ul class ="list-unstyled">
-      <p> - <strong>Nombre: </strong><%=@salida.nombre%> </p>
-      <p> - <strong> Dirección: </strong> <%=@salida.direccion%></p>
-      <p> - <strong>Telefono: </strong><%=@salida.telefono%></p>
-      <p> - <strong> Correo Electronico: </strong> <%=@salida.email%></p>
-      <p> - <strong> Contacto: </strong> <%=@salida.contacto%></p>
+    <ul class ="list-unstyled together">
+      <p class ="together"> - <strong>Nombre: </strong><%=@salida.nombre%> </p>
+      <p class ="together"> - <strong> Dirección: </strong> <%=@salida.direccion%></p>
+      <p class ="together"> - <strong>Telefono: </strong><%=@salida.telefono%></p>
+      <p class ="together"> - <strong> Correo Electronico: </strong> <%=@salida.email%></p>
+      <p class ="together"> - <strong> Contacto: </strong> <%=@salida.contacto%></p>
     </ul>
   </div>
 
@@ -150,15 +154,15 @@
   </div>
 
   <div class ="filling-format">
-    <h4 class ="text-center">- <strong>Reporte general de servicio:</strong></h4>
+    <h4 class ="text-center space-dismiss">- <strong>Reporte general de servicio:</strong></h4>
   </div>
 
   <div class ="list-info">
     <ul class ="list-unstyled">
-      <p> <strong>- Marca:</strong> <%=@salida.marca%> </p>
-      <p> <strong>- Modelo:</strong> <%=@salida.modelo%> </p>
-      <p> <strong>- Serie:</strong> <%=@salida.serie%> </p>
-      <p> <strong>- Capacidad:</strong> <%=@salida.capacidad%> </p>
+      <p class ="together"> <strong>- Marca:</strong> <%=@salida.marca%> </p>
+      <p class ="together"> <strong>- Modelo:</strong> <%=@salida.modelo%> </p>
+      <p class ="together"> <strong>- Serie:</strong> <%=@salida.serie%> </p>
+      <p class ="together"> <strong>- Capacidad:</strong> <%=@salida.capacidad%> </p>
     </ul>
     <p> <strong>- Observaciones: </strong></p>
     <div class ="box-obs">
@@ -169,7 +173,7 @@
   <%if @salida.materials.count > 0 %>
     <div class ="material text-center">
       <div class ="changes">
-        <h4><strong> - Lista de materiales requeridos</strong> </h4>
+        <h4 class ="space-dismiss"><strong> - Lista de materiales requeridos</strong> </h4>
         <%if current_user.id == 2 && !@salida.terminada.nil?%>
           <div>
             <%= link_to "Modificar cantidades", "#matchangeModal", "data-toggle" => "modal", class: "btn btn-warning" %>
