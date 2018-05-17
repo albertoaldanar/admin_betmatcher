@@ -173,10 +173,10 @@
   <%if @salida.materials.count > 0 %>
     <div class ="material text-center">
       <div class ="changes">
-        <h4 class ="space-dismiss"><strong> - Lista de materiales requeridos</strong> </h4>
+         <%= link_to "Agregar material", "#matModal", "data-toggle" => "modal", class: "btn btn-info" %>
         <%if current_user.id == 2 && !@salida.terminada.nil?%>
           <div>
-            <%= link_to "Modificar cantidades", "#matchangeModal", "data-toggle" => "modal", class: "btn btn-warning" %>
+            <%= link_to "Modificar material", "#matchangeModal", "data-toggle" => "modal", class: "btn btn-warning" %>
           </div>
         <%end%>
       </div>
@@ -220,7 +220,7 @@
     </div>
 
   <%else%>
-    <p class ="text-center"> * No hay materiales registrados</p>
+      <%= link_to "Agregar material", "#matModal", "data-toggle" => "modal" %>
   <%end%>
 
   <%if current_user.id == 2 && !@salida.terminada.nil?%>
