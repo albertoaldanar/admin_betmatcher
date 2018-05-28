@@ -174,7 +174,7 @@
     <div class ="material text-center">
       <div class ="changes">
          <%= link_to "Agregar material", "#matModal", "data-toggle" => "modal", class: "btn btn-info" %>
-        <%if current_user.id == 2 && !@salida.terminada.nil?%>
+        <%if (current_user.id == 2 || current_user.email == "servicios1@aldana.com") && !@salida.terminada.nil?%>
           <div>
             <%= link_to "Modificar material", "#matchangeModal", "data-toggle" => "modal", class: "btn btn-warning" %>
           </div>
@@ -223,7 +223,7 @@
       <%= link_to "Agregar material", "#matModal", "data-toggle" => "modal" %>
   <%end%>
 
-  <%if current_user.id == 2 && !@salida.terminada.nil?%>
+  <%if (current_user.id == 2 || current_user.email == "servicios1@aldana.com") && !@salida.terminada.nil?%>
     <div class = "text-center">
       <p><strong> - Historial de cambios realizados por administrador</strong></p>
 
