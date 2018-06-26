@@ -62,7 +62,7 @@ class SalidasController < ApplicationController
   end
 
   def edit_params
-    params.require(:salida).permit(:marca, :modelo, :lecturas, :serie, :capacidad, :nombre, :telefono, :solicitud_cliente, :contacto, :direccion, :email)
+    params.require(:salida).permit(:marca, :modelo, :lecturas, :serie, :capacidad, :nombre, :telefono, :solicitud_cliente, :contacto, :direccion, :email, :mecanico)
   end
 
   def mat_params
