@@ -248,7 +248,11 @@
     <div class ="firmas">
       <h4 class ="firma">Firma de cliente</h4>
       <h4 class ="firma">Firma de jefe de taller</h4>
-      <h4 class ="firma">Firma de Mecanico%> </h4>
+      <%if @salida.mecanico%>
+        <h4 class ="firma">Firma de <%=@salida.mecanico%></h4>
+      <%else%>
+        <h4 class ="firma">Firma de mecanico</h4>
+      <%end%>
     </div>
   <%end%>
 
@@ -304,6 +308,9 @@
             </div>
             <div class="form-group">
               <%= f.text_field :lecturas, class: "form-control input-lg", placeholder: "Lecturas" %>
+            </div>
+            <div class="form-group">
+              <%= f.text_field :mecanico, class: "form-control input-lg", placeholder: "Nombre de mecanico" %>
             </div>
 
         </div>
