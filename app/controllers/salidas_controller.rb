@@ -16,7 +16,6 @@ class SalidasController < ApplicationController
     @material = Material.new
     @material.salida_id = @salida.id
     @mat_vuelta = Material.all
-    raise
   end
 
   def edit
