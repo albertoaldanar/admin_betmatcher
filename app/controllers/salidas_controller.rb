@@ -2,8 +2,15 @@ class SalidasController < ApplicationController
   before_action :authenticate_user!
   def index
     @salidas = Salida.where(terminada: nil)
+    all_s = Salida.order(:folio)
     @salida_c = @salidas.count
     @salida_nueva = Salida.new
+
+    respond_to do |format|
+      format.html
+      format.csv {render text: all_s.to_csv }
+    end
+
   end
 
   def new
