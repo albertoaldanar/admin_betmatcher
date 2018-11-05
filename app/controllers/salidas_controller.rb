@@ -1,7 +1,7 @@
 class SalidasController < ApplicationController
   before_action :authenticate_user!
   def index
-    @salidas = Salida.where(terminada: nil).order(:id)
+    @salidas = Salida.where(terminada: nil).order('id DESC')
     all_s = Salida.order(:folio)
     @salida_c = @salidas.count
     @salida_nueva = Salida.new
@@ -59,7 +59,7 @@ class SalidasController < ApplicationController
 
 
   def ready
-    @salidas = Salida.where(terminada: true).order(:id)
+    @salidas = Salida.where(terminada: true).order('id DESC')
     @salida_c = @salidas.count
   end
 
