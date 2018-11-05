@@ -10,7 +10,6 @@ class SalidasController < ApplicationController
       format.html
       format.csv {render text: all_s.to_csv }
     end
-
   end
 
   def new
@@ -65,7 +64,7 @@ class SalidasController < ApplicationController
 
   private
   def require_params
-    params.require(:salida).permit(:nombre, :telefono, :email, :solicitud_cliente, :contacto, :direccion, :mecanico)
+    params.require(:salida).permit(:nombre, :telefono, :email, :solicitud_cliente, :contacto, :direccion)
   end
 
   def edit_params
