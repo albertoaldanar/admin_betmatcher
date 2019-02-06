@@ -1,14 +1,16 @@
 class SalidasController < ApplicationController
   before_action :authenticate_user!
   def index
-    @salidas = Salida.where(terminada: nil).order('id DESC')
+    # @salidas = Salida.where(terminada: nil).order('id DESC')
+    @salidas = Salida.search(params[:nombre])
+
     all_s = Salida.order(:folio)
     @salida_c = @salidas.count
     @salida_nueva = Salida.new
 
     respond_to do |format|
       format.html
-      format.csv {render text: all_s.to_csv }
+      format.csv { render text: all_s.to_csv }
     end
   end
 
@@ -58,7 +60,7 @@ class SalidasController < ApplicationController
 
 
   def ready
-    @salidas = Salida.where(terminada: true).order('id DESC')
+    @salidas = Salida.searchT(params[:nombre])
     @salida_c = @salidas.count
   end
 

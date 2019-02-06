@@ -27,6 +27,10 @@
         <h2>Completas</h2>
         <br/>
         <br/>
+        <%= form_tag(terminadas_path, method: :get) do%>
+          <%= text_field_tag(:nombre, params[:nombre])%>
+          <%=submit_tag("Buscar")%>
+        <%end%>
         <ul class ="list-unstyled user-list">
           <%@salidas.each do |salida|%>
             <li class ="items">
