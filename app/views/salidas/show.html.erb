@@ -248,7 +248,7 @@
     <div class ="firmas">
       <h4 class ="firma">Firma de cliente</h4>
       <h4 class ="firma">Firma de jefe de taller</h4>
-      <h4 class ="firma">Firma de mecanico</h4>
+      <h4 class ="firma"><%=@salida.mecanico%></h4>
     </div>
   <%end%>
 
@@ -284,6 +284,10 @@
 
             <div class="form-group">
               <%= f.text_field :direccion, class: "form-control input-lg", placeholder: "Dirección" %>
+            </div>
+
+            <div class="form-group">
+              <%= f.text_field :mecanico, class: "form-control input-lg", placeholder: "Tecnico" %>
             </div>
 
              <div class="form-group">
