@@ -248,7 +248,7 @@
     <div class ="firmas">
       <h4 class ="firma">Firma de cliente</h4>
       <h4 class ="firma">Firma de jefe de taller</h4>
-      <h4 class ="firma">Firma de taller</h4>
+      <h4 class ="firma"><%=@salida.serie%></h4>
     </div>
   <%end%>
 
@@ -297,7 +297,7 @@
               <%= f.text_field :modelo, class: "form-control input-lg", placeholder: "Modelo" %>
             </div>
             <div class="form-group">
-              <%= f.text_field :serie, class: "form-control input-lg", placeholder: "Serie" %>
+              <%= f.text_field :serie, class: "form-control input-lg", placeholder: "Tecnico" %>
             </div>
             <div class="form-group">
               <%= f.text_field :capacidad, class: "form-control input-lg", placeholder: "Capacidad" %>
