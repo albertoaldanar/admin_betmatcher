@@ -95,6 +95,10 @@
     margin-bottom: -10px;
   }
 
+  .factura{
+    margin-right: 50px;
+  }
+
 </style>
 <br/>
 <%= link_to root_path, class: "btn btn-default" do %>
@@ -130,6 +134,10 @@
 
         <li>
           <p><strong><%=@salida.created_at.strftime("%Y-%m-%d")%></strong></p>
+        </li>
+
+        <li>
+          <p class="factura"><strong>Factura: </strong></p>
         </li>
       </ul>
     </div>
