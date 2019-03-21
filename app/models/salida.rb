@@ -3,7 +3,7 @@ class Salida < ApplicationRecord
 
   def self.search(search)
       if search && search.length > 0
-        salida = Salida.where('nombre LIKE ?', "%#{search}%")
+        salida = Salida.where('nombre LIKE ?', "%#{search}.upcase%")
       else
         Salida.where(terminada: nil).order('id DESC')
       end
